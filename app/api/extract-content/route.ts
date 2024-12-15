@@ -22,6 +22,11 @@ export async function POST(request: Request) {
       .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
       .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
       .replace(/<[^>]+>/g, '')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/&apos;/g, "'")
       .replace(/&nbsp;/g, ' ')
       // Convert multiple consecutive newlines to a maximum of two
       .replace(/\n{3,}/g, '\n\n')
