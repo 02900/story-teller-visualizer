@@ -2,8 +2,8 @@
 
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import BackgroundShader from "../components/BackgroundShader";
-import StoryContent from "../components/story-content";
 import { useThemeStore } from "../stores/useThemeStore";
+import StoryContent from "../components/story-content";
 
 export default function Page() {
   const { showShader, toggleShader } = useThemeStore();
