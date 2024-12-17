@@ -18,6 +18,7 @@ export interface StoryState {
 }
 
 export interface StoryActions {
+  setTitle: (title: string) => void;
   setStory: (story: string) => void;
   setParagraphs: (paragraphs: StoryParagraph[]) => void;
   setActiveParagraph: (id: string) => void;

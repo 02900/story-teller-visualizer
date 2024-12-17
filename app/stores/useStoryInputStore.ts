@@ -1,22 +1,24 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface StoryInputState {
+  titlePreview: string;
+  setTitlePreview: (title: string) => void;
   inputText: string;
   setInputText: (text: string) => void;
-  reset: () => void;
 }
 
 export const useStoryInputStore = create<StoryInputState>()(
   persist(
     (set) => ({
-      inputText: '',
+      titlePreview: "",
+      setTitlePreview: (title) => set({ titlePreview: title }),
+      inputText: "",
       setInputText: (inputText) => set({ inputText }),
-      reset: () => set({ inputText: '' }),
     }),
     {
-      name: 'story-input-storage',
-      skipHydration: true
+      name: "story-input-storage",
+      skipHydration: true,
     }
   )
 );

@@ -8,15 +8,23 @@ import { UrlContentExtractor } from "./UrlContentExtractor";
 
 export function StoryInput() {
   const router = useRouter();
-  const { setStory, setParagraphs } = useStoryStore();
-  const { inputText, setInputText, reset } = useStoryInputStore();
+  const { setStory, setParagraphs, setTitle } = useStoryStore();
+  const { inputText, setInputText, titlePreview, setTitlePreview } =
+    useStoryInputStore();
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(e.target.value);
   };
 
-  const handleContentExtracted = (content: string) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitlePreview(e.target.value);
+  };
+
+  const handleContentExtracted = (content: string, title?: string) => {
     setInputText(content);
+    if (title) {
+      setTitlePreview(title);
+    }
   };
 
   const handleStartReading = () => {
@@ -24,7 +32,7 @@ export function StoryInput() {
     const paragraphs = splitIntoParagraphs(inputText);
     setStory(inputText);
     setParagraphs(paragraphs);
-    reset(); // Clear the input after starting to read
+    setTitle(titlePreview);
     router.push("/read");
   };
 
@@ -34,8 +42,16 @@ export function StoryInput() {
 
       <UrlContentExtractor onContentExtracted={handleContentExtracted} />
 
+      <input
+        type="text"
+        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+        placeholder="Story title (optional)..."
+        value={titlePreview}
+        onChange={handleTitleChange}
+      />
+
       <textarea
-        className="w-full h-[160px]"
+        className="w-full h-[160px] px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
         placeholder="Write or paste your story here..."
         value={inputText}
         onChange={handleTextChange}
