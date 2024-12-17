@@ -3,35 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --background: #F8F9FA;
-  --surface: #FFFFFF;
-  --text-primary: #2D3748;
+  --background: #f8f9fa;
+  --surface: #ffffff;
+  --text-primary: #2d3748;
   --text-muted: #718096;
-  --accent: #3B82F6;
+  --accent: #3b82f6;
 }
 
 :root[data-theme="nord"] {
-  --background: #2E3440;
-  --surface: #3B4252;
-  --text-primary: #ECEFF4;
-  --text-muted: #D8DEE9;
-  --accent: #88C0D0;
+  --background: #2e3440;
+  --surface: #3b4252;
+  --text-primary: #eceff4;
+  --text-muted: #d8dee9;
+  --accent: #88c0d0;
 }
 
 :root[data-theme="solarized"] {
-  --background: #FDF6E3;
-  --surface: #EEE8D5;
-  --text-primary: #586E75;
-  --text-muted: #93A1A1;
-  --accent: #268BD2;
+  --background: #fdf6e3;
+  --surface: #eee8d5;
+  --text-primary: #586e75;
+  --text-muted: #93a1a1;
+  --accent: #268bd2;
 }
 
 :root[data-theme="solarized-dark"] {
-  --background: #002B36;
+  --background: #002b36;
   --surface: #073642;
-  --text-primary: #93A1A1;
-  --text-muted: #586E75;
-  --accent: #268BD2;
+  --text-primary: #93a1a1;
+  --text-muted: #586e75;
+  --accent: #268bd2;
 }
 
 :root[data-theme="github-light"] {
@@ -93,7 +93,7 @@ input[type="email"],
 input[type="password"] {
   @apply w-full p-2 border rounded;
   @apply bg-white text-gray-900;
-  @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  @apply focus:ring-2 focus:ring-accent focus:border-accent;
   @apply transition-colors duration-200;
   color: var(--text-primary);
   background: var(--surface);
@@ -107,7 +107,7 @@ input::placeholder {
 textarea {
   @apply w-full p-2 border rounded;
   @apply bg-white text-gray-900;
-  @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  @apply focus:ring-2 focus:ring-accent focus:border-accent;
   @apply transition-colors duration-200;
   color: var(--text-primary);
   background: var(--surface);
