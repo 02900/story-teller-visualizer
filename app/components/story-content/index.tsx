@@ -68,6 +68,24 @@ export default function StoryContent() {
                         />
                     ))}
                 </div>
+                <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-20">
+                    <div className="relative w-16 h-16 flex items-center justify-center">
+                        {/* Outer glow ring */}
+                        <div className="absolute inset-0 rounded-full bg-cyan-500 opacity-20 blur-md animate-pulse"></div>
+                        {/* Progress circle */}
+                        <div className="absolute inset-0 rounded-full border-4 border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.5)]"
+                             style={{
+                                 background: `conic-gradient(from 0deg, rgb(6 182 212) ${progress}%, transparent ${progress}%)`
+                             }}>
+                        </div>
+                        {/* Inner circle with progress text */}
+                        <div className="absolute inset-2 rounded-full bg-black flex items-center justify-center">
+                            <span className="text-cyan-500 text-sm font-bold" style={{ textShadow: '0 0 8px rgb(6 182 212)' }}>
+                                {Math.round(progress)}%
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     );
