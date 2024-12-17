@@ -21,7 +21,7 @@ export const useCharacterTemplatesStore = create<CharacterTemplatesState>()(
         return {
           templates: [...state.templates, {
             ...character,
-            id: Date.now().toString(),
+            id: Date.now().toString() + '-' + Math.random().toString(36).substring(2),
           }]
         };
       }),
