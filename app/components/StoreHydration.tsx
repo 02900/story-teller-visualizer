@@ -9,7 +9,7 @@ import { useStoryInputStore } from '../stores/useStoryInputStore';
 
 export function StoreHydration() {
   const [isHydrated, setIsHydrated] = useState(false);
-  const { isDark } = useThemeStore();
+  const { theme } = useThemeStore();
 
   useEffect(() => {
     Promise.all([
@@ -25,13 +25,9 @@ export function StoreHydration() {
 
   useEffect(() => {
     if (isHydrated) {
-      if (isDark) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+      document.documentElement.setAttribute('data-theme', theme);
     }
-  }, [isHydrated, isDark]);
+  }, [isHydrated, theme]);
 
   return null;
 }

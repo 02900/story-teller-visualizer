@@ -42,8 +42,8 @@ export default function StoryContent() {
 
     if (paragraphs.length === 0) {
         return (
-            <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center">
-                <p className="text-gray-600 text-lg">No story to display. Please add a story first.</p>
+            <div className="min-h-screen bg-background flex items-center justify-center">
+                <p className="text-text-primary text-lg">No story to display. Please add a story first.</p>
             </div>
         );
     }
@@ -56,8 +56,8 @@ export default function StoryContent() {
                     style={{ width: `${progress}%` }}
                 />
             </div>
-            <div className="min-h-screen py-[240px] relative z-10">
-                <div className="max-w-3xl mx-auto py-12 px-4 space-y-8">
+            <div className="min-h-screen py-[240px] relative z-10 bg-background">
+                <div className="max-w-3xl mx-auto py-12 px-4 space-y-8 text-text-primary">
                     {paragraphs.map((paragraph, index) => (
                         <ParagraphSection
                             key={paragraph.id}
