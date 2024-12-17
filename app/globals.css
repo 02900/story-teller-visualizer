@@ -3,82 +3,86 @@
 @tailwind utilities;
 
 :root {
+  --background: #F8F9FA;
+  --surface: #FFFFFF;
+  --text-primary: #2D3748;
+  --text-muted: #718096;
+  --accent: #3B82F6;
+}
+
+:root[data-theme="nord"] {
+  --background: #2E3440;
+  --surface: #3B4252;
+  --text-primary: #ECEFF4;
+  --text-muted: #D8DEE9;
+  --accent: #88C0D0;
+}
+
+:root[data-theme="solarized"] {
+  --background: #FDF6E3;
+  --surface: #EEE8D5;
+  --text-primary: #586E75;
+  --text-muted: #93A1A1;
+  --accent: #268BD2;
+}
+
+:root[data-theme="solarized-dark"] {
+  --background: #002B36;
+  --surface: #073642;
+  --text-primary: #93A1A1;
+  --text-muted: #586E75;
+  --accent: #268BD2;
+}
+
+:root[data-theme="github-light"] {
   --background: #ffffff;
-  --foreground: #171717;
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --surface: #f6f8fa;
+  --text-primary: #24292f;
+  --text-muted: #57606a;
+  --accent: #0969da;
 }
 
-.dark {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
+:root[data-theme="github-dark"] {
+  --background: #0d1117;
+  --surface: #161b22;
+  --text-primary: #c9d1d9;
+  --text-muted: #8b949e;
+  --accent: #58a6ff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root[data-theme="dracula"] {
+  --background: #282a36;
+  --surface: #343746;
+  --text-primary: #f8f8f2;
+  --text-muted: #6272a4;
+  --accent: #bd93f9;
+}
+
+:root[data-theme="tokyo-night"] {
+  --background: #1a1b26;
+  --surface: #24283b;
+  --text-primary: #a9b1d6;
+  --text-muted: #565f89;
+  --accent: #7aa2f7;
 }
 
 body {
-  color: var(--foreground);
+  color: var(--text-primary);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-end-rgb));
 }
 
-/* Dark mode styles */
-.dark body {
-  @apply bg-gray-900;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-primary);
 }
 
-.dark h1,
-.dark h2,
-.dark h3,
-.dark h4,
-.dark h5,
-.dark h6 {
-  @apply text-white;
-}
-
-.dark p {
-  @apply text-gray-300;
-}
-
-.dark .bg-white {
-  @apply bg-gray-800;
-}
-
-.dark .bg-gray-50 {
-  @apply bg-gray-800;
-}
-
-.dark .text-gray-800 {
-  @apply text-gray-100;
-}
-
-.dark .text-gray-600 {
-  @apply text-gray-400;
-}
-
-.dark .from-blue-50 {
-  @apply from-gray-900;
-}
-
-.dark .to-white {
-  @apply to-gray-800;
-}
-
-.dark .border-gray-200 {
-  @apply border-gray-700;
-}
-
-.dark .hover\:bg-gray-100:hover {
-  @apply hover:bg-gray-700;
+p {
+  color: var(--text-muted);
 }
 
 /* Input styles */
@@ -87,18 +91,14 @@ input[type="url"],
 input[type="number"],
 input[type="email"],
 input[type="password"] {
-  @apply w-full p-2 border border-gray-200 rounded;
-  @apply bg-white text-gray-900 placeholder-gray-500;
+  @apply w-full p-2 border border-surface rounded;
+  @apply bg-white text-gray-900;
   @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
   @apply transition-colors duration-200;
+  color: var(--text-primary);
+  background: var(--surface);
 }
 
-/* Dark theme input styles */
-.dark input[type="text"],
-.dark input[type="url"],
-.dark input[type="number"],
-.dark input[type="email"],
-.dark input[type="password"] {
-  @apply bg-gray-800 text-white border-gray-700;
-  @apply placeholder-gray-400;
+input::placeholder {
+  color: var(--text-muted);
 }

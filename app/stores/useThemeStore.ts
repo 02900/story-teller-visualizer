@@ -1,19 +1,28 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+export type ThemeType = 
+  | 'nord' 
+  | 'solarized' 
+  | 'solarized-dark'
+  | 'github-dark'
+  | 'github-light'
+  | 'dracula'
+  | 'tokyo-night';
+
 interface ThemeState {
-  isDark: boolean;
+  theme: ThemeType;
   showShader: boolean;
-  toggleTheme: () => void;
+  setTheme: (theme: ThemeType) => void;
   toggleShader: () => void;
 }
 
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
-      isDark: false,
+      theme: 'github-light',
       showShader: true,
-      toggleTheme: () => set((state) => ({ isDark: !state.isDark })),
+      setTheme: (theme) => set({ theme }),
       toggleShader: () => set((state) => ({ showShader: !state.showShader })),
     }),
     {
