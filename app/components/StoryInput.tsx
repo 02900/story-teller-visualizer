@@ -1,19 +1,15 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useStoryStore } from '../stores/useStoryStore';
-import { useStoryInputStore } from '../stores/useStoryInputStore';
-import { splitIntoParagraphs } from '../stores/useStoryStore';
-import { UrlContentExtractor } from './UrlContentExtractor';
+import { useRouter } from "next/navigation";
+import { useStoryStore } from "../stores/useStoryStore";
+import { useStoryInputStore } from "../stores/useStoryInputStore";
+import { splitIntoParagraphs } from "../stores/useStoryStore";
+import { UrlContentExtractor } from "./UrlContentExtractor";
 
 export function StoryInput() {
   const router = useRouter();
   const { setStory, setParagraphs } = useStoryStore();
-  const {
-    inputText,
-    setInputText,
-    reset
-  } = useStoryInputStore();
+  const { inputText, setInputText, reset } = useStoryInputStore();
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(e.target.value);
@@ -29,14 +25,12 @@ export function StoryInput() {
     setStory(inputText);
     setParagraphs(paragraphs);
     reset(); // Clear the input after starting to read
-    router.push('/read');
+    router.push("/read");
   };
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-primary">Your Story</h2>
-      </div>
+      <h2 className="text-xl font-semibold text-primary">Your Story</h2>
 
       <UrlContentExtractor onContentExtracted={handleContentExtracted} />
 
