@@ -11,9 +11,6 @@ export async function POST(request: Request) {
     let title = $(`.${titleId}`).html() || '';
     let content = $(`#${elementId}`).html() || '';
 
-    console.log('titleId:', titleId);
-    console.log('Title:', title);
-    
     // Replace <br> tags with newlines
     content = content.replace(/<br\s*\/?>/gi, '\n');
     
