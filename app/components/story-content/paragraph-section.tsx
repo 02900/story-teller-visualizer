@@ -1,6 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { BsTranslate } from 'react-icons/bs';
 import { useStoryStore } from '../../stores/useStoryStore';
+import { useTranslation } from '../../hooks/useTranslation';
 
 export function ParagraphSection({ content, id, index, total }: { content: string; id: string; index: number; total: number }) {
     const ref = useRef(null);
@@ -8,6 +10,8 @@ export function ParagraphSection({ content, id, index, total }: { content: strin
     const [lastScrollY, setLastScrollY] = useState(0);
     const [scrollingDown, setScrollingDown] = useState(true);
     const [isInit, setIsInit] = useState(false);
+    const [translatedContent, setTranslatedContent] = useState<string | null>(null);
+    const { translate, isTranslating } = useTranslation();
 
     // Update scroll direction
     useEffect(() => {
@@ -45,6 +49,20 @@ export function ParagraphSection({ content, id, index, total }: { content: strin
         content.toLowerCase().includes(char.name.toLowerCase())
     );
 
+    const handleTranslateClick = async () => {
+        if (translatedContent) {
+            setTranslatedContent(null);
+            return;
+        }
+
+        try {
+            const translated = await translate(content);
+            setTranslatedContent(translated);
+        } catch (error) {
+            console.error('Translation error:', error);
+        }
+    };
+
     return (
         <motion.div
             ref={ref}
@@ -57,9 +75,39 @@ export function ParagraphSection({ content, id, index, total }: { content: strin
                 : 'bg-gray-50 hover:bg-gray-100'
                 }`}
         >
-            <p className={`text-lg leading-relaxed ${isActive ? 'text-gray-800' : 'text-gray-600'}`}>
-                {content}
-            </p>
+            <div className="flex justify-between items-start gap-4">
+                <div className="flex-grow space-y-4">
+                    <div className="relative">
+                        <p className={`text-lg leading-relaxed ${isActive ? 'text-gray-800' : 'text-gray-600'} ${isTranslating ? 'opacity-50' : ''}`}>
+                            {translatedContent || content}
+                        </p>
+                        {isTranslating && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                            </div>
+                        )}
+                    </div>
+                    {translatedContent && (
+                        <p className="text-sm text-gray-500 italic">
+                            Original: {content}
+                        </p>
+                    )}
+                </div>
+                <button
+                    onClick={handleTranslateClick}
+                    className={`flex-shrink-0 p-2 rounded-full transition-colors ${
+                        translatedContent 
+                            ? 'bg-blue-100 hover:bg-blue-200 dark:bg-blue-900 dark:hover:bg-blue-800' 
+                            : 'hover:bg-gray-100 dark:hover:bg-gray-700'
+                    }`}
+                    title={translatedContent ? "Show original" : "Translate"}
+                    disabled={isTranslating}
+                >
+                    <BsTranslate className={`w-5 h-5 ${
+                        translatedContent ? 'text-blue-600 dark:text-blue-400' : 'text-blue-500'
+                    } ${isTranslating ? 'animate-pulse' : ''}`} />
+                </button>
+            </div>
 
             {mentionedCharacters.length > 0 && (
                 <div className="mt-4 flex gap-4 overflow-x-auto pb-2">
