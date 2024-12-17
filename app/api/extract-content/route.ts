@@ -3,13 +3,16 @@ import * as cheerio from 'cheerio';
 
 export async function POST(request: Request) {
   try {
-    const { url, elementId } = await request.json();
-
+    const { url, elementId, titleId } = await request.json();
     const response = await fetch(url);
     const html = await response.text();
     
     const $ = cheerio.load(html);
+    let title = $(`.${titleId}`).html() || '';
     let content = $(`#${elementId}`).html() || '';
+
+    console.log('titleId:', titleId);
+    console.log('Title:', title);
     
     // Replace <br> tags with newlines
     content = content.replace(/<br\s*\/?>/gi, '\n');
@@ -36,7 +39,7 @@ export async function POST(request: Request) {
       .join('\n')
       .trim();
 
-    return NextResponse.json({ content: cleanContent });
+    return NextResponse.json({ title, content: cleanContent });
   } catch (error) {
     return NextResponse.json(
       { error: 'Failed to extract content' },

@@ -5,8 +5,14 @@ import { splitIntoParagraphs, useStoryStore } from "../../stores/useStoryStore";
 import { ParagraphSection } from "./paragraph-section";
 
 export default function StoryContent() {
-  const { paragraphs, story, setParagraphs, setStory, activeParagraphId } =
-    useStoryStore();
+  const {
+    paragraphs,
+    story,
+    title,
+    setParagraphs,
+    setStory,
+    activeParagraphId,
+  } = useStoryStore();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -52,7 +58,10 @@ export default function StoryContent() {
   }
 
   return (
-    <>
+    <div className="relative min-h-screen bg-background text-text-primary p-4 md:p-8">
+      {title && (
+        <h1 className="fixed top-5 left-[50%] translate-x-[-50%] text-3xl font-bold mb-8 text-center text-accent">{title}</h1>
+      )}
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[11]">
         <div
           className="h-full bg-accent transition-all duration-150"
@@ -94,6 +103,6 @@ export default function StoryContent() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
