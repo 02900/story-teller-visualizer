@@ -32,9 +32,9 @@ export function CharacterInput() {
   };
 
   return (
-    <div className="space-y-4 bg-white">
+    <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+        <h2 className="text-xl font-semibold text-primary">
           Characters
         </h2>
 

@@ -35,13 +35,13 @@ export function StoryInput() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-gray-800">Your Story</h2>
+        <h2 className="text-xl font-semibold text-primary">Your Story</h2>
       </div>
 
       <UrlContentExtractor onContentExtracted={handleContentExtracted} />
 
       <textarea
-        className="w-full h-[160px] p-4 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800 bg-white placeholder-gray-400"
+        className="w-full h-[160px]"
         placeholder="Write or paste your story here..."
         value={inputText}
         onChange={handleTextChange}

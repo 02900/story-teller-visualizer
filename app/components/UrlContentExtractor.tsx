@@ -44,9 +44,9 @@ export function UrlContentExtractor({ onContentExtracted }: UrlContentExtractorP
   };
 
   return (
-    <div className="space-y-4 mb-6 bg-gray-50 rounded-lg">
+    <div className="space-y-4 mb-6 rounded-lg">
       <div className="flex justify-between items-center">
-        <h3 className="text-lg font-medium text-gray-800">Extract Content from URL</h3>
+        <h3 className="text-lg font-medium text-primary">Extract Content from URL</h3>
         {(url || elementId) && (
           <button
             onClick={() => useUrlExtractorStore.getState().reset()}

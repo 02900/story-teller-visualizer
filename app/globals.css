@@ -91,14 +91,25 @@ input[type="url"],
 input[type="number"],
 input[type="email"],
 input[type="password"] {
-  @apply w-full p-2 border border-surface rounded;
+  @apply w-full p-2 border rounded;
   @apply bg-white text-gray-900;
   @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
   @apply transition-colors duration-200;
   color: var(--text-primary);
   background: var(--surface);
+  border-color: var(--text-muted);
 }
 
 input::placeholder {
   color: var(--text-muted);
+}
+
+textarea {
+  @apply w-full p-2 border rounded;
+  @apply bg-white text-gray-900;
+  @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  @apply transition-colors duration-200;
+  color: var(--text-primary);
+  background: var(--surface);
+  border-color: var(--text-muted);
 }
