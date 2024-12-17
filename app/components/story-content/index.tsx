@@ -58,9 +58,9 @@ export default function StoryContent() {
   }
 
   return (
-    <div className="relative min-h-screen bg-background text-text-primary p-4 md:p-8">
+    <div className="relative text-text-primary p-4 md:p-8">
       {title && (
-        <h1 className="fixed top-5 left-[50%] translate-x-[-50%] text-3xl font-bold mb-8 text-center text-accent">{title}</h1>
+        <h1 className="fixed top-5 left-[50%] translate-x-[-50%] text-3xl font-bold mb-8 text-center text-primary">{title}</h1>
       )}
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[11]">
         <div
@@ -68,7 +68,7 @@ export default function StoryContent() {
           style={{ width: `${progress}%` }}
         />
       </div>
-      <div className="min-h-screen py-[240px] relative z-10">
+      <div className="py-[240px] relative z-10">
         <div className="max-w-3xl mx-auto py-12 px-4 space-y-8 text-text-primary">
           {paragraphs.map((paragraph, index) => (
             <ParagraphSection
