@@ -55,11 +55,16 @@ export function ParagraphSection({
 
   const isActive = activeParagraphId === id;
 
-  // Find mentioned characters in the paragraph
+  // Find mentioned characters in the paragraph in order of appearance
   const { characters } = useStoryStore();
-  const mentionedCharacters = characters.filter((char) =>
-    content.toLowerCase().includes(char.name.toLowerCase())
-  );
+  const mentionedCharacters = characters
+    .map((char) => ({
+      character: char,
+      position: content.toLowerCase().indexOf(char.name.toLowerCase()),
+    }))
+    .filter(({ position }) => position !== -1)
+    .sort((a, b) => a.position - b.position)
+    .map(({ character }) => character);
 
   const handleTranslateClick = async () => {
     if (translatedContent) {
