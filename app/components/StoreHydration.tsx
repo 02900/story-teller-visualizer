@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useStoryStore } from '../stores/useStoryStore';
 import { useThemeStore } from '../stores/useThemeStore';
-import { useCharacterTemplatesStore } from '../stores/useCharacterTemplatesStore';
 import { useCharacterFormStore } from '../stores/useCharacterFormStore';
 import { useStoryInputStore } from '../stores/useStoryInputStore';
 
@@ -15,7 +14,6 @@ export function StoreHydration() {
     Promise.all([
       useStoryStore.persist.rehydrate(),
       useThemeStore.persist.rehydrate(),
-      useCharacterTemplatesStore.persist.rehydrate(),
       useCharacterFormStore.persist.rehydrate(),
       useStoryInputStore.persist.rehydrate()
     ]).then(() => {

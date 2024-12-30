@@ -1,32 +1,20 @@
 "use client";
 
-import { BsTrash, BsDownload, BsUpload } from "react-icons/bs";
-import { Character } from "../../types";
-import { useCharacterTemplatesStore } from "../../stores/useCharacterTemplatesStore";
+import { useStoryStore } from "@/app/stores/useStoryStore";
 import { useState } from "react";
+import { BsDownload, BsTrash, BsUpload } from "react-icons/bs";
 
-interface CharacterTemplatesProps {
-  showTemplates: boolean;
-  onSelectTemplate: (template: Character) => void;
-}
-
-export function CharacterTemplates({
-  showTemplates,
-  onSelectTemplate,
-}: CharacterTemplatesProps) {
-  const { templates, removeTemplate, addTemplate } =
-    useCharacterTemplatesStore();
+export function CharacterTemplates() {
+  const { characters, addCharacter, removeCharacter } = useStoryStore();
   const [error, setError] = useState("");
-
-  if (!showTemplates) return null;
 
   const handleDelete = (e: React.MouseEvent, id: string) => {
     e.stopPropagation(); // Prevent template selection when clicking delete
-    removeTemplate(id);
+    removeCharacter(id);
   };
 
   const handleExport = () => {
-    const templatesJson = JSON.stringify(templates, null, 2);
+    const templatesJson = JSON.stringify(characters, null, 2);
     const blob = new Blob([templatesJson], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -75,7 +63,7 @@ export function CharacterTemplates({
     }
 
     validTemplates.forEach((template) => {
-      addTemplate({
+      addCharacter({
         name: template.name,
         imageUrl: template.imageUrl,
       });
@@ -113,33 +101,29 @@ export function CharacterTemplates({
         <div className="p-3 bg-red-100 text-red-700 rounded-lg">{error}</div>
       )}
 
-      {templates.length === 0 ? (
+      {characters.length === 0 ? (
         <p className="text-center text-gray-500">No templates available</p>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {templates.map((template) => (
-            <div
-              key={template.id}
-              onClick={() => onSelectTemplate(template)}
-              className="cursor-pointer group relative"
-            >
+          {characters.map((character) => (
+            <div key={character.id} className="cursor-pointer group relative">
               <div className="aspect-square rounded-lg overflow-hidden">
                 <img
-                  src={template.imageUrl}
-                  alt={template.name}
+                  src={character.imageUrl}
+                  alt={character.name}
                   className="w-full h-full object-top object-cover group-hover:opacity-75 transition-opacity"
                 />
               </div>
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center">
                 <button
-                  onClick={(e) => handleDelete(e, template.id)}
+                  onClick={(e) => handleDelete(e, character.id)}
                   className="opacity-0 group-hover:opacity-100 bg-red-600 text-white px-3 py-1 rounded-full text-sm transition-opacity flex items-center gap-1"
                 >
                   <BsTrash className="w-4 h-4" /> Remove
                 </button>
               </div>
               <p className="mt-2 text-center font-medium text-gray-800 dark:text-gray-200">
-                {template.name}
+                {character.name}
               </p>
             </div>
           ))}

@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { StoryActions, StoryParagraph } from "../types";
+import { Character, StoryActions, StoryParagraph } from "../types";
 
 interface StoryState {
   story: string;
   title: string;
   paragraphs: StoryParagraph[];
   activeParagraphId: string | null;
-  characters: any[];
+  characters: Character[];
   isGenerating: boolean;
 }
 
